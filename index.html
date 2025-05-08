@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>출석 체크</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+    #result {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <h2>출석 체크</h2>
   <form id="attendanceForm">
-    <label>학번: <input type="text" name="studentId" required></label><br>
-    <label>이름: <input type="text" name="name" required></label><br>
+    <input type="text" name="studentId" placeholder="학번 입력" required>
+    <input type="text" name="name" placeholder="이름 입력" required>
     <button type="submit">출석하기</button>
   </form>
   <p id="result"></p>
@@ -21,7 +50,7 @@
       formData.append("studentId", e.target.studentId.value);
       formData.append("name", e.target.name.value);
 
-      fetch("https://script.google.com/macros/s/AKfycbw1ef8Wg3MBZP69pJbFPic8gqTytC-6TmFDSxba3IBcfYR902msbSuTEhyCSMzwt7QX/exec", {
+      fetch("YOUR_WEB_APP_URL", {
         method: "POST",
         body: formData,
         headers: {

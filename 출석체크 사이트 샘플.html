@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>출석 체크</title>
+</head>
+<body>
+  <h2>출석 체크</h2>
+  <form id="attendanceForm">
+    <label>학번: <input type="text" name="studentId" required></label><br>
+    <label>이름: <input type="text" name="name" required></label><br>
+    <button type="submit">출석하기</button>
+  </form>
+  <p id="result"></p>
+
+  <script>
+    document.getElementById("attendanceForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const formData = new URLSearchParams();
+      formData.append("studentId", e.target.studentId.value);
+      formData.append("name", e.target.name.value);
+
+      fetch("https://script.google.com/macros/s/AKfycbw1ef8Wg3MBZP69pJbFPic8gqTytC-6TmFDSxba3IBcfYR902msbSuTEhyCSMzwt7QX/exec", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
+      .then(response => response.text())
+      .then(result => {
+        document.getElementById("result").innerText = result;
+      })
+      .catch(error => {
+        document.getElementById("result").innerText = "에러 발생: " + error;
+      });
+    });
+  </script>
+</body>
+</html>
